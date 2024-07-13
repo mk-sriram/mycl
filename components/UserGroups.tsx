@@ -1,5 +1,14 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useState, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  LayoutChangeEvent,
+} from "react-native";
+
+import GroupModal from "../app/(modals)/GroupModal";
 
 type Member = {
   id: string;
@@ -10,21 +19,41 @@ type Member = {
 type UserGroupsProps = {
   name: string;
   members: Member[];
-  onPress: () => void;
 };
 
-const UserGroups: React.FC<UserGroupsProps> = ({ name, members, onPress }) => {
+const UserGroups: React.FC<UserGroupsProps> = ({ name, members }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [groupPosition, setGroupPosition] = useState({ x: 0, y: 0 });
+
+  const onLayout = (event: LayoutChangeEvent) => {
+    const { x, y } = event.nativeEvent.layout;
+    setGroupPosition({ x, y });
+  };
+
+  const toggleModal = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
-    <TouchableOpacity style={styles.groupContainer} onPress={onPress}>
-      <View style={styles.imageContainer}>
-        {members.slice(0, 4).map((member, index) => (
-          <View key={index} style={styles.imageWrapper}>
-            <Image source={member.uri} style={styles.imagePlaceholder} />
-          </View>
-        ))}
-      </View>
-      <Text style={styles.groupName}>{name}</Text>
-    </TouchableOpacity>
+    <View onLayout={onLayout}>
+      <TouchableOpacity style={styles.groupContainer} onPress={toggleModal}>
+        <View style={styles.imageContainer}>
+          {members.slice(0, 4).map((member, index) => (
+            <View key={index} style={styles.imageWrapper}>
+              <Image source={member.uri} style={styles.imagePlaceholder} />
+            </View>
+          ))}
+        </View>
+        <Text style={styles.groupName}>{name}</Text>
+      </TouchableOpacity>
+
+      <GroupModal
+        visible={isModalVisible}
+        onClose={toggleModal}
+        group={{ name, members }}
+        position={groupPosition}
+      />
+    </View>
   );
 };
 
@@ -39,7 +68,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: "#fff",
     borderRadius: 30,
-    
+    padding: 15,
     height: 150,
     width: 150,
     elevation: 2,
@@ -50,30 +79,24 @@ const styles = StyleSheet.create({
       width: 1,
       height: 5,
     },
-
+    justifyContent: "center",
+    alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    
   },
   imageWrapper: {
     width: "50%",
-    height: "50%", 
     justifyContent: "center",
     alignItems: "center",
     padding: 2,
-    //backgroundColor: "red",
   },
   imagePlaceholder: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
     margin: 5,
-  },
-  imageText: {
-    color: "#000",
-    fontSize: 16,
   },
   groupName: {
     color: "black",
