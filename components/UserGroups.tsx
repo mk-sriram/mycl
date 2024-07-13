@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useRef } from "react";
 import {
   View,
@@ -54,6 +55,26 @@ const UserGroups: React.FC<UserGroupsProps> = ({ name, members }) => {
         position={groupPosition}
       />
     </View>
+=======
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+
+type UserGroupsProps = {
+  name: string;
+  link: string;
+};
+
+const UserGroups: React.FC<UserGroupsProps> = ({ name }) => {
+  return (
+    <TouchableOpacity style={styles.groupContainer}>
+      <View style={styles.imageContainer}>
+        <View style={styles.imagePlaceholder}>
+          <Text style={styles.imageText}>img</Text>
+        </View>
+      </View>
+      <Text style={styles.groupName}>{name}</Text>
+    </TouchableOpacity>
+>>>>>>> parent of 5789bba (added groups and fixed)
   );
 };
 
@@ -68,7 +89,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: "#fff",
     borderRadius: 30,
+<<<<<<< HEAD
     padding: 15,
+=======
+    padding: 10,
+>>>>>>> parent of 5789bba (added groups and fixed)
     height: 150,
     width: 150,
     elevation: 2,
@@ -79,6 +104,7 @@ const styles = StyleSheet.create({
       width: 1,
       height: 5,
     },
+<<<<<<< HEAD
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -94,9 +120,18 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 20,
+=======
     justifyContent: "center",
     alignItems: "center",
-    margin: 5,
+  },
+  imagePlaceholder: {
+    width: 140,
+    height: 140,
+    backgroundColor: "#e0e0e0",
+    borderRadius: 30,
+>>>>>>> parent of 5789bba (added groups and fixed)
+    justifyContent: "center",
+    alignItems: "center",
   },
   groupName: {
     color: "black",
