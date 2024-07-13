@@ -16,6 +16,9 @@ type Member = {
   id: string;
   name: string;
   uri: any;
+  phoneNum: string;
+  contactMethod: "instagram" | "message";
+  contactLink: string;
 };
 
 type Group = {
@@ -38,6 +41,27 @@ const GroupModal: React.FC<GroupModalProps> = ({
 }) => {
   if (!group) return null;
 
+  const renderContactIcon = (method: "instagram" | "message") => {
+    switch (method) {
+      case "instagram":
+        return (
+          <Image
+            source={require("../../assets/images/instagram.png")}
+            style={styles.IconImage}
+          />
+        );
+      case "message":
+        return (
+          <Image
+            source={require("../../assets/images/messages.png")}
+            style={styles.IconImage}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <Modal
       isVisible={visible}
@@ -54,17 +78,38 @@ const GroupModal: React.FC<GroupModalProps> = ({
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Ionicons name="close" size={30} color="#000" />
         </TouchableOpacity>
-
         <FlatList
           data={group.members}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <View style={styles.memberContainer}>
               <Image source={item.uri} style={styles.memberImage} />
-              <Text style={styles.memberName}>{item.name}</Text>
+              <View style={styles.memberInfo}>
+                <Text style={styles.memberName}>{item.name}</Text>
+                <View style={styles.contactIcons}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      /* Handle phone call */
+                    }}
+                  >
+                    <Image
+                      source={require("../../assets/images/phone.png")}
+                      style={styles.IconImage}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      /* Handle default contact method */
+                    }}
+                  >
+                    {renderContactIcon(item.contactMethod)}
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           )}
-          numColumns={2}
+          numColumns={1}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </Modal>
@@ -96,25 +141,42 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     alignSelf: "flex-end",
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontFamily: "mon-sb",
-    marginBottom: 20,
+    //backgroundColor: "red",
   },
   memberContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    margin: 10,
+    marginVertical: 10,
+    paddingHorizontal: 20,
+    width: Dimensions.get("window").height * 0.3,
+    //backgroundColor: "green",
   },
   memberImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginBottom: 5,
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    marginRight: 10,
+  },
+  memberInfo: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingTop: 2,
   },
   memberName: {
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "mon",
+    marginBottom: 5,
+  },
+  contactIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  IconImage: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
   },
 });
 

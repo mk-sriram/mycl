@@ -17,6 +17,9 @@ type Member = {
   id: string;
   name: string;
   uri: any;
+  phoneNum: string;
+  contactMethod: string;
+  contactLink: string;
 };
 
 type Group = {
@@ -32,31 +35,47 @@ const placeholderGroups: Group[] = [
         id: "1",
         name: "John",
         uri: require("../../assets/images/profilePics/image1.jpg"),
+        phoneNum: "tel:+1234567890",
+        contactMethod: "instagram",
+        contactLink: "https://instagram.com/john_profile",
       },
       {
         id: "2",
         name: "Jane",
         uri: require("../../assets/images/profilePics/image2.jpg"),
+        phoneNum: "tel:+1234567891",
+        contactMethod: "message",
+        contactLink: "sms:+1234567891",
       },
       {
         id: "3",
         name: "Alex",
         uri: require("../../assets/images/profilePics/image3.jpg"),
+        phoneNum: "tel:+1234567892",
+        contactMethod: "instagram",
+        contactLink: "https://instagram.com/alex_profile",
       },
       {
         id: "4",
         name: "Sam",
         uri: require("../../assets/images/profilePics/image4.jpg"),
+        phoneNum: "tel:+1234567893",
+        contactMethod: "message",
+        contactLink: "sms:+1234567893",
       },
       {
         id: "5",
         name: "Chris",
         uri: require("../../assets/images/profilePics/image5.jpg"),
+        phoneNum: "tel:+1234567894",
+        contactMethod: "instagram",
+        contactLink: "https://instagram.com/chris_profile",
       },
     ],
   },
   // Add more placeholder groups as needed
 ];
+
 
 const Page: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -106,7 +125,7 @@ const Page: React.FC = () => {
                 <UserGroups
                   name={item.name}
                   members={item.members}
-                  onPress={() => handleOpenModal(item)}
+               
                 />
               </View>
             )}

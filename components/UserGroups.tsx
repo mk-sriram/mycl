@@ -14,7 +14,11 @@ type Member = {
   id: string;
   name: string;
   uri: any;
+  phoneNum: string;
+  contactMethod: "instagram" | "message";
+  contactLink: string;
 };
+
 
 type UserGroupsProps = {
   name: string;
