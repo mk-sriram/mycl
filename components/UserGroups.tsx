@@ -1,18 +1,27 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+
+type Member = {
+  id: string;
+  name: string;
+  uri: any;
+};
 
 type UserGroupsProps = {
   name: string;
-  link: string;
+  members: Member[];
+  onPress: () => void;
 };
 
-const UserGroups: React.FC<UserGroupsProps> = ({ name }) => {
+const UserGroups: React.FC<UserGroupsProps> = ({ name, members, onPress }) => {
   return (
-    <TouchableOpacity style={styles.groupContainer}>
+    <TouchableOpacity style={styles.groupContainer} onPress={onPress}>
       <View style={styles.imageContainer}>
-        <View style={styles.imagePlaceholder}>
-          <Text style={styles.imageText}>img</Text>
-        </View>
+        {members.slice(0, 4).map((member, index) => (
+          <View key={index} style={styles.imageWrapper}>
+            <Image source={member.uri} style={styles.imagePlaceholder} />
+          </View>
+        ))}
       </View>
       <Text style={styles.groupName}>{name}</Text>
     </TouchableOpacity>
@@ -30,7 +39,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: "#fff",
     borderRadius: 30,
-    padding: 10,
+    
     height: 150,
     width: 150,
     elevation: 2,
@@ -41,16 +50,26 @@ const styles = StyleSheet.create({
       width: 1,
       height: 5,
     },
+
+    flexDirection: "row",
+    flexWrap: "wrap",
+    
+  },
+  imageWrapper: {
+    width: "50%",
+    height: "50%", 
     justifyContent: "center",
     alignItems: "center",
+    padding: 2,
+    //backgroundColor: "red",
   },
   imagePlaceholder: {
-    width: 140,
-    height: 140,
-    backgroundColor: "#e0e0e0",
-    borderRadius: 30,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
+    margin: 5,
   },
   imageText: {
     color: "#000",
