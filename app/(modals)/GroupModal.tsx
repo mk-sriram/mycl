@@ -27,9 +27,15 @@ type GroupModalProps = {
   visible: boolean;
   onClose: () => void;
   group: Group | null;
+  position: { x: number; y: number };
 };
 
-const GroupModal: React.FC<GroupModalProps> = ({ visible, onClose, group }) => {
+const GroupModal: React.FC<GroupModalProps> = ({
+  visible,
+  onClose,
+  group,
+  position,
+}) => {
   if (!group) return null;
 
   return (

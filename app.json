@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mycl",
-    "slug": "mycl",
+    "name": "mycl2",
+    "slug": "mycl2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -30,8 +30,7 @@
       "expo-router"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "tsconfigPaths": true
+      "typedRoutes": true
     }
   }
 }
