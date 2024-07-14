@@ -11,8 +11,9 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import SearchHeader from "@/components/SearchHeader";
-import { Stack } from "expo-router";
+import { router, Stack } from "expo-router";
 import SearchContacts from "@/components/SearchContacts";
+import FloatingActionButton from "@/components/FloatingAction";
 
 type Member = {
   id: string;
@@ -139,7 +140,7 @@ const ContactsPage: React.FC = () => {
             </View>
             <TouchableOpacity
               onPress={() => {
-                /* Handle contact method click */
+                router.navigate("profile");
               }}
             >
               <Ionicons name="chevron-forward" size={24} />
@@ -175,6 +176,7 @@ const ContactsPage: React.FC = () => {
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
+      <FloatingActionButton style={styles.floatAB}/>
     </View>
   );
 };
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   header: {
     marginTop: 10,
@@ -265,6 +267,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0e0e0",
     marginLeft: 75, // Adjust as needed for proper indentation
   },
+  floatAB:{
+    position: "absolute",
+    
+  }
 });
 
 export default ContactsPage;
