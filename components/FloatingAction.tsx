@@ -22,7 +22,7 @@ const FloatingActionButton = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.container}>
+      <View style={styles.fabContainer}>
         {isOpen.value && (
           <View style={styles.menu}>
             <TouchableOpacity style={styles.menuItem}>
@@ -50,11 +50,10 @@ const FloatingActionButton = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    padding: 16,
+  fabContainer: {
+    position: "absolute",
+    top: 110, // Adjust the distance from the top as needed
+    right: 1230, // Adjust the distance from the right as needed
   },
   fab: {
     width: 56,

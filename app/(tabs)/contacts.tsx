@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import SearchHeader from "@/components/SearchHeader";
@@ -92,7 +91,6 @@ const ContactsPage: React.FC = () => {
     },
   ];
 
-
   const renderContactIcon = (method: string) => {
     switch (method) {
       case "instagram":
@@ -176,7 +174,7 @@ const ContactsPage: React.FC = () => {
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
-      <FloatingActionButton style={styles.floatAB}/>
+      {/* <FloatingActionButton /> */}
     </View>
   );
 };
@@ -267,10 +265,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#e0e0e0",
     marginLeft: 75, // Adjust as needed for proper indentation
   },
-  floatAB:{
+  fab: {
     position: "absolute",
-    
-  }
+    top: 20, // Adjust the distance from the top as needed
+    right: 20, // Adjust the distance from the right as needed
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#6200ee",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
+  },
 });
 
 export default ContactsPage;
